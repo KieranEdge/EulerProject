@@ -2,10 +2,12 @@
 int end = 1000000;
 int maxSequence = 0;
 
+Dictionary<long, int> knownColdatzSequence = new Dictionary<long, int>();
+
 for (int i = start; i < end; i++)
 {
     Console.WriteLine($"Calculating for {i}");
-    int nextNumber = i;
+    long nextNumber = i;
     int sequenceLength = 1;
     while (nextNumber != 1)
     {
@@ -17,13 +19,24 @@ for (int i = start; i < end; i++)
         {
             nextNumber = (nextNumber * 3) + 1;
         }
-        sequenceLength++;
+
+        if (knownColdatzSequence.ContainsKey(nextNumber))
+        {
+            sequenceLength = knownColdatzSequence[nextNumber] + sequenceLength;
+            break;
+        }
+        else
+        {
+            sequenceLength++;
+        }
     }
-    //Console.Write($"{i} has a sequence of {sequenceLength}");
-    if(sequenceLength > maxSequence)
+
+    if (!knownColdatzSequence.ContainsKey(i))
     {
-        maxSequence = sequenceLength;
+        knownColdatzSequence.Add(i, sequenceLength);
     }
 }
 
-Console.WriteLine($"Max sequence length = {maxSequence}");
+long keyOfMaxValue = knownColdatzSequence.MaxBy(x => x.Value).Key;
+
+Console.WriteLine($"Max sequence length = {keyOfMaxValue}");
