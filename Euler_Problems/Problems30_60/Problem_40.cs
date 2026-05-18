@@ -1,5 +1,6 @@
 using Problems.Interfaces;
 
+
 namespace Problems.Problems30_60;
 
 public class Problem_40 : IProblem

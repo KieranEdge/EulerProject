@@ -2,5 +2,5 @@
 using Problems.Problems30_60;
 using Problems.Problems150_180;
 
-IProblem problem = new Problem_33();
+IProblem problem = new Problem_39();
 Console.WriteLine(problem.Solve());
