@@ -11,7 +11,7 @@ public class Problem_35:IProblem
     public string Solve()
     {
         // Getting the reference library
-        Dictionary<int, bool> isNumberPrimeDictionary = EratosthenesSieve.PrimesUpToN(1000000);
+        Dictionary<int, bool> isNumberPrimeDictionary = EratosthenesSieve.PrimesUpToNAsDictionary(1000000);
         List<int> circularPrimes = [2];
 
         for (int i = 3; i < 1000000; i += 2)
