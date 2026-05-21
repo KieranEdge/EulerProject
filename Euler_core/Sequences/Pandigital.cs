@@ -2,24 +2,36 @@ namespace ProjectEuler.Core.Sequences;
 
 public class Pandigital
 {
-    public static bool IsNumberPandigital(long number)
+    public static bool IsPandigital(long number, int minDigit, int maxDigit)
     {
-        char[] digitsArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-        string numberAsString = number.ToString();
+        string s = number.ToString();
 
-        if (numberAsString.Contains('0'))
-        {
+        int requiredLength = maxDigit - minDigit + 1;
+
+        if (s.Length != requiredLength)
             return false;
+
+        bool[] seen = new bool[10];
+
+        foreach (char c in s)
+        {
+            int digit = c - '0';
+
+            if (digit < minDigit || digit > maxDigit)
+                return false;
+
+            if (seen[digit])
+                return false;
+
+            seen[digit] = true;
         }
 
-        foreach (char digit in digitsArray)
+        for (int i = minDigit; i <= maxDigit; i++)
         {
-            int digitCount = numberAsString.Count(c => c == digit);
-            if (digitCount != 1)
-            {
+            if (!seen[i])
                 return false;
-            }
         }
+
         return true;
     }
 }
